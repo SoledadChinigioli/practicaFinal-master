@@ -1,0 +1,94 @@
+<section id="tabla" style="margin-top: 60px;">
+  <div>
+      <button *ngIf="isLogged" type="button" class="btn btn-primary " (click)="agregar(0)">Agregar</button>
+      <hr>
+  </div>
+  <div>
+      <table class="table">
+          <thead>
+              <tr>
+                  <th scope="col">id</th>
+                  <th scope="col">Nombre</th>
+                  <th scope="col">Apellido</th>
+
+                  <th scope="col">DNI</th>
+
+                  <th scope="col">Acciones</th>
+              </tr>
+          </thead>
+          <tbody>
+              <tr *ngFor="let i of personas">
+                  <td>{{i.id}}</td>
+                  <td>{{i.nombre}}</td>
+                  <td>{{i.apellido}}</td>
+                  <td>{{i.dni}}</td>
+                  <td>
+                      <button *ngIf="isLogged" type="button" class="btn btn-danger" (click)="delete(i.id)">Eliminar</button>
+                      <!-- <button *ngIf="isLogged" type="button" class="btn btn-warning" (click)="update(i.id)">Editar</button> -->
+                      <!-- <button *ngIf="isLogged" type="button" class="btn btn-warning" data-toggle="modal" data-target="#editModal">
+                        Editar
+                      </button> -->
+                      <button *ngIf="isLogged" type="button" class="btn btn-warning" (click)="open(editModal, i)">
+                        Editar
+                      </button>
+                    </td>
+
+              </tr>
+          </tbody>
+      </table>
+
+  
+  
+      <ng-template #editModal let-modal>
+        <div class="modal-header">
+          <h4 class="modal-title" id="modal-basic-title">Editar persona</h4>
+          <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <!-- Nombre: {{ modalContent.nombre }}
+          <br>
+          Apellido: {{ modalContent.apellido }}
+          <br>
+          DNI: {{ modalContent.dni }} -->
+        
+          <form >
+            <div>            
+                <input [(ngModel)]="persona.nombre" [formControl]="nombreFormControl" placeholder="Nombre"
+                  name="nombre">          
+            </div>
+            <br>
+            <div>            
+                <input [(ngModel)]="persona.apellido" [formControl]="apellidoFormControl" placeholder="Apellido"
+                  name="apellido">          
+            </div>
+            <br>
+            <div>            
+                <input [(ngModel)]="persona.dni" [formControl]="dniFormControl" placeholder="DNI"
+                  name="dni">          
+            </div>
+            <br>
+
+            <div>
+              <tr>
+                <td colspan="6" class="">
+                  <button class="boton" class="btn btn-danger" (click)="modal.dismiss('Cross click')"s>Cancelar</button>
+                  <button class="boton" class="btn btn-primary" (click)="confirmarEdit(persona,editModal)">Aceptar</button>
+                </td>
+              </tr>
+            </div>
+          </form>
+        
+        </div>
+      </ng-template>
+      <hr>
+      
+      <pre>{{closeResult}}</pre>
+
+
+      
+
+
+  </div>
+</section>
